@@ -1,0 +1,32 @@
+# 安装前需将UDR初始化 
+# The UDR must be initialized before installation 
+# 需要开启SSH功能 
+# The SSH function needs to be enabled 
+# SSH 到UDR cli 
+ssh root@192.168.1.1
+#创建目录
+#Create directory
+sudo mkdir -p /mnt/data/zerotier-one/
+#下载安装包
+#Download installation package
+curl https://download.zerotier.com/dist/ubiquiti/zerotier-one_arm64.deb \
+--output /mnt/data/zerotier-one/zerotier-one.deb
+
+# 安装zerotier
+#Install zerotier
+sudo dpkg -i /mnt/data/zerotier-one/zerotier-one.deb
+# 查看服务状态  
+#Check Service Status
+sudo systemctl status zerotier-one
+# 启动服务 
+#Start service
+sudo systemctl start zerotier-one
+# 加入网络 Join the network:
+sudo zerotier-cli join <your-network-id>
+#Authorization in the ZeroTier administrative console
+# 确认状态
+#Confirmation status
+sudo zerotier-cli listnetworks
+#开机自启
+#Self-starting
+sudo systemctl enable zerotier-one
